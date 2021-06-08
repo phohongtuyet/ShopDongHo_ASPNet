@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopDongHoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ChatLieu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenChatLieu" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DatHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NhanVien_ID" Type="int" />
+    <Property Name="KhachHang_ID" Type="int" />
+    <Property Name="DienThoaiGiaoHang" Type="nvarchar" MaxLength="20" />
+    <Property Name="DiaChiGiaoHang" Type="nvarchar" MaxLength="255" />
+    <Property Name="NgayDatHang" Type="datetime" />
+    <Property Name="TinhTrang" Type="smallint" />
+  </EntityType>
+  <EntityType Name="DatHang_ChiTiet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DatHang_ID" Type="int" />
+    <Property Name="DongHo_ID" Type="int" />
+    <Property Name="SoLuong" Type="smallint" />
+    <Property Name="DonGia" Type="int" />
+  </EntityType>
+  <EntityType Name="DongHo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ThuongHieu_ID" Type="int" />
+    <Property Name="TenLoai_ID" Type="int" />
+    <Property Name="ChatLieu_ID" Type="int" />
+    <Property Name="XuatXu_ID" Type="int" />
+    <Property Name="TenDongHo" Type="nvarchar" MaxLength="255" />
+    <Property Name="MauSac" Type="nvarchar" MaxLength="255" />
+    <Property Name="HanBaoHanh" Type="int" />
+    <Property Name="DonGia" Type="int" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="HinhAnhDH" Type="nvarchar" MaxLength="255" />
+    <Property Name="MoTa" Type="ntext" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoVaten" Type="nvarchar" MaxLength="100" />
+    <Property Name="DienThoai" Type="nvarchar" MaxLength="20" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
+    <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="LoaiDH">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenLoai" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoVaTen" Type="nvarchar" MaxLength="100" />
+    <Property Name="DienThoai" Type="nvarchar" MaxLength="20" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
+    <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="255" />
+    <Property Name="Quyen" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="ThuongHieu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenThuongHieu" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="XuatXu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenQG" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__DatHang__KhachHa__440B1D61">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="DatHang" Type="Self.DatHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DatHang">
+        <PropertyRef Name="KhachHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DatHang__NhanVie__4316F928">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="DatHang" Type="Self.DatHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DatHang">
+        <PropertyRef Name="NhanVien_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DatHang_C__DatHa__4CA06362">
+    <End Role="DatHang" Type="Self.DatHang" Multiplicity="0..1" />
+    <End Role="DatHang_ChiTiet" Type="Self.DatHang_ChiTiet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DatHang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DatHang_ChiTiet">
+        <PropertyRef Name="DatHang_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DatHang_C__DongH__4D94879B">
+    <End Role="DongHo" Type="Self.DongHo" Multiplicity="0..1" />
+    <End Role="DatHang_ChiTiet" Type="Self.DatHang_ChiTiet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DongHo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DatHang_ChiTiet">
+        <PropertyRef Name="DongHo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DongHo__ChatLieu__48CFD27E">
+    <End Role="ChatLieu" Type="Self.ChatLieu" Multiplicity="0..1" />
+    <End Role="DongHo" Type="Self.DongHo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatLieu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DongHo">
+        <PropertyRef Name="ChatLieu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DongHo__TenLoai___47DBAE45">
+    <End Role="LoaiDH" Type="Self.LoaiDH" Multiplicity="0..1" />
+    <End Role="DongHo" Type="Self.DongHo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiDH">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DongHo">
+        <PropertyRef Name="TenLoai_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DongHo__ThuongHi__46E78A0C">
+    <End Role="ThuongHieu" Type="Self.ThuongHieu" Multiplicity="0..1" />
+    <End Role="DongHo" Type="Self.DongHo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ThuongHieu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DongHo">
+        <PropertyRef Name="ThuongHieu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DongHo__XuatXu_I__49C3F6B7">
+    <End Role="XuatXu" Type="Self.XuatXu" Multiplicity="0..1" />
+    <End Role="DongHo" Type="Self.DongHo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="XuatXu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DongHo">
+        <PropertyRef Name="XuatXu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopDongHoModelStoreContainer">
+    <EntitySet Name="ChatLieu" EntityType="Self.ChatLieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatHang" EntityType="Self.DatHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatHang_ChiTiet" EntityType="Self.DatHang_ChiTiet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DongHo" EntityType="Self.DongHo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiDH" EntityType="Self.LoaiDH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThuongHieu" EntityType="Self.ThuongHieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="XuatXu" EntityType="Self.XuatXu" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__DatHang__KhachHa__440B1D61" Association="Self.FK__DatHang__KhachHa__440B1D61">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="DatHang" EntitySet="DatHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DatHang__NhanVie__4316F928" Association="Self.FK__DatHang__NhanVie__4316F928">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DatHang" EntitySet="DatHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DatHang_C__DatHa__4CA06362" Association="Self.FK__DatHang_C__DatHa__4CA06362">
+      <End Role="DatHang" EntitySet="DatHang" />
+      <End Role="DatHang_ChiTiet" EntitySet="DatHang_ChiTiet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DatHang_C__DongH__4D94879B" Association="Self.FK__DatHang_C__DongH__4D94879B">
+      <End Role="DongHo" EntitySet="DongHo" />
+      <End Role="DatHang_ChiTiet" EntitySet="DatHang_ChiTiet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DongHo__ChatLieu__48CFD27E" Association="Self.FK__DongHo__ChatLieu__48CFD27E">
+      <End Role="ChatLieu" EntitySet="ChatLieu" />
+      <End Role="DongHo" EntitySet="DongHo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DongHo__TenLoai___47DBAE45" Association="Self.FK__DongHo__TenLoai___47DBAE45">
+      <End Role="LoaiDH" EntitySet="LoaiDH" />
+      <End Role="DongHo" EntitySet="DongHo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DongHo__ThuongHi__46E78A0C" Association="Self.FK__DongHo__ThuongHi__46E78A0C">
+      <End Role="ThuongHieu" EntitySet="ThuongHieu" />
+      <End Role="DongHo" EntitySet="DongHo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DongHo__XuatXu_I__49C3F6B7" Association="Self.FK__DongHo__XuatXu_I__49C3F6B7">
+      <End Role="XuatXu" EntitySet="XuatXu" />
+      <End Role="DongHo" EntitySet="DongHo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
