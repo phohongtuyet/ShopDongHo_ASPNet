@@ -1,7 +1,1 @@
-Tài khoản khách hàng
-thang 123
-tinh 123
-
-Tài khoản nhân viên
-admin 123	
-user 123456
+https://chatgpt.com/share/6877a76b-c720-8002-ad7c-a989f99c3d79
